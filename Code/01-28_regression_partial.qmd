@@ -44,12 +44,15 @@ Talk about each of these patterns.
 
 Here is where we load the packages we will use.
 
+
+
+
 ```{r setup}
 #| message: false
 #| warning: false
 
 #install.packages("nlraa")
-install.packages("metrica")
+#install.packages("metrica")
 
 # Loading packages
 library(tidyverse) # for data wrangling and plotting
@@ -63,6 +66,8 @@ library(nlraa) # for starting value functions
 library(metrica) # for rmse
 
 ```
+
+
 
 Reading data and doing some light wrangling.  
 ```{r}
@@ -94,8 +99,8 @@ Yield ranging from 7.8 to 15.6 Mg/ha.
 
 ```{r reg exp boxplot}
 ggplot (data = reg_dfw,
-        aes (x = sr_ksha
-             y= yield_mgha))
+        aes (x = sr_ksha,
+             y = yield_mgha))+
   geom_boxplot()
 ```
 
@@ -104,9 +109,9 @@ What is going on with this boxplot?
 ```{r reg plot point + smooth}
 ggplot(reg_dfw, 
        aes(x = sr_ksha, 
-           y = yield_mgha))
- geom_point
- geom_smooth
+           y = yield_mgha))+
+ geom_point()+
+ geom_smooth()
 ```
 
 Let's fit 4 different models to assess which one fits the data the best. 
@@ -148,10 +153,10 @@ mod1_int_aug
 ```{r mod1 Standardized Residuals vs. Fitted}
 ggplot(mod1_int_aug,
        aes(x = .fitted,
-           y= .stdresid)
+           y = .stdresid)
        ) +
   geom_point(size =3,
-             alpha = .7)
+             alpha = .7) +
   geom_hline(yintercept = 0,
              color = "red") +
   geom_smooth()
